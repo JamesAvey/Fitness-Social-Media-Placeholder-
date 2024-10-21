@@ -15,9 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+# your_app_name/urls.py
+
 from django.urls import path
+from .views import UserProfileListCreate, UserProfileDetail, UserProfileView  # Import your views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('profiles/', UserProfileListCreate.as_view(), name='userprofile-list-create'),  # List and create profiles
+    path('profiles/<int:pk>/', UserProfileDetail.as_view(), name='userprofile-detail'),  # Retrieve, update, and delete a profile
+    path('profile/<int:pk>/', UserProfileView.as_view(), name='userprofile'),  # Specific user profile view
 ]
 
